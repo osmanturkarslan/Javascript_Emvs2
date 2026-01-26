@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Webcam</title>
+</head>
+
+<body>
+    <button id="startWebcam" onclick="setupWebcam()">Start Webcam</button>
+    <button id="stopWebcam" onclick="stopWebcam()">Stop Webcam</button>
+    <button id="capturePhoto" onclick="capturePhoto()">Capture Photo</button>
+
+    <div id="container">
+        <div id="links"></div>
+        <video id="webcam"></video>
+        <div id="rechts"></div>
+    </div>
+    <div id="unten"></div>
+    <script>
+        async function setupWebcam() {
+            const videoElement = document.getElementById('webcam');
+            console.log(videoElement);
+
+            videoElement.srcObject = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+            videoElement.onloadedmetadata = () => {
+                videoElement.play();
+            };
+        }
+
+        function stopWebcam() {
+            const videoElement = document.getElementById('webcam');
+            const stream = videoElement.srcObject;
+            const tracks = stream.getTracks();
+
+            tracks.forEach(track => track.stop());
+            videoElement.srcObject = null;
+        }
+
+        function capturePhoto() {
+            const videoElement = document.getElementById('webcam');
+            const canvas = document.createElement('canvas');
+            canvas.width = 290;
+            canvas.height = 200;
+            const context = canvas.getContext('2d');
+            context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            const dataURL = canvas.toDataURL('image/png');
+
+            if (document.getElementById('links').children.length < 2) {
+                document.getElementById('links').appendChild(canvas);
+            } else if (document.getElementById('rechts').children.length < 2) {
+                document.getElementById('rechts').appendChild(canvas);
+            } else {
+                document.getElementById('unten').appendChild(canvas);
+            }
+
+
+            //const imgWindow = window.open('', '_blank');
+            //imgWindow.document.write('<img src="' + dataURL + '"/>');
+        }
+        //setupWebcam();
+    </script>
+</body>
+
+</html>

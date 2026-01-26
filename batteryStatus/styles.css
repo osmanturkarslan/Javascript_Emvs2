@@ -1,0 +1,66 @@
+
+    p{
+        text-align: center;
+    }
+
+    /* shape of the battery */
+    #battery {
+      width: 100px;
+      height: 50px;
+      border: 2px solid #000;
+      position: relative;
+      margin: 20px auto;
+      border-radius: 8px;
+    }
+
+    /* tip of the battery */
+    #battery:before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      right: -10px;
+      width: 10px;
+      height: 20px;
+      background: #000;
+    }
+
+    #battery-level {
+      height: 100%;
+      transition: width 0.5s;
+      position: relative;
+      border-radius: 6px;
+    }
+
+    .red {
+      background: red;
+    }
+
+    .green {
+      background: green;
+    }
+
+    .blue {
+      background: blue;
+    }
+    
+    /* when battery is charging, we show glowing green box-shadow*/
+    .charging {
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0% { box-shadow: 0 0 10px green; }
+      50% { box-shadow: 0 0 20px green; }
+      100% { box-shadow: 0 0 10px green; }
+    }
+    
+    /* Thunder sign inside battery */
+    .charging::after {
+      content: '⚡';
+      color: rgb(4, 94, 4);
+      font-size: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
