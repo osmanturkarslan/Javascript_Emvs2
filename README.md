@@ -31,6 +31,12 @@ This application allows users to access their webcam, capture photos, preview th
 
 ---
 
+## 🌐 Live Demo
+
+The webcam application is now live at: [https://osmanturkarslan.github.io/jsemvs2/webcam/](https://osmanturkarslan.github.io/jsemvs2/webcam/)
+
+---
+
 ## ✨ Features
 
 - 📷 Capture photos using the webcam  
